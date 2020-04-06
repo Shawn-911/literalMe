@@ -2,7 +2,7 @@
   <title>literalMe</title>
 </head>
 
-<body>
+<body class = "darkmode">
   <div class="container">
     {{> navBar}}
     {{> mainBody}}
@@ -121,27 +121,35 @@
   </section>
 </template>
 <template name = "booksLib">
+<div class="container darkmode">
   <div class="row">
     {{#each allBooks}}
    
-<div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src= {{path}} alt="temp photo" class = "brath" >
+<div class="col-md-4" id={{_id}}>
+            <div class="card mb-4 shadow-sm  ">
+              <img src= {{path}} alt="temp photo" class="brath">
               <div class="card-body">
-                <p class="card-text"> {{bName}}</p>
+                <h5 class="card-text">{{bName}}</h5>
+                
+                <p class="card-text"> {{bAuth}}</p>
                 {{>viewTemp}}
+                {{>editTemp}}
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary js-view ">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary js-edit">Edit</button>
                   </div>
-                  <small class="text-muted">9 mins</small>
+                  
+                  <i class="fa fa-thumbs-up goodcolor"></i>
+                  <i class="fa fa-thumbs-down bincolor"></i>
+                  
                 </div>
               </div>
             </div>
           </div> <!-- /col -->
     {{/each}}
-  </div>        
+  </div>  
+  </div>     
 </template>
 <template name="mainBody">
   <main role="main">
@@ -170,7 +178,7 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Description</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -180,7 +188,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <i class="fa fa-trash bincolor js-delete"></i>
       </div>
     </div>
   </div>
@@ -198,3 +206,55 @@
     </div>
   </footer>
 </template>
+
+<template name="editTemp">
+    <!-- Modal -->
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit your book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="imgPlaceHolder.png" alt="" class="placeHolder">
+        <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" >Title</span>
+  </div>
+  <input type="text" class="form-control" placeholder="..." aria-label="Username" aria-describedby="basic-addon1" id="editName" >
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" >Author</span>
+  </div>
+  <input type="text" class="form-control" placeholder="Please enter the book author" id="editAuth" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" >Place your image path here</span>
+  </div>
+  <input type="text" class="form-control" placeholder="https://example.com/users/" id="editpath" aria-describedby="basic-addon3">
+</div>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"  >Enter a short description</span>
+  </div>
+  <textarea class="form-control" aria-label="With textarea" id = "editdesc" ></textarea>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary js-editsave" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </template>
