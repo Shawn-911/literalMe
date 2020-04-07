@@ -50,9 +50,7 @@
     <div class="container">
       <h1 class="jumbotron-heading">literalMe</h1>
       <p class="lead text-muted">Glad you found your way here. It's always a good time to read a book. Find your passion amongst the stars by choosing from our many categories tailored just for you.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Top Rated Book</a>
-      </p>
+      
 
       <div class="row">
         <div class="col">
@@ -71,7 +69,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Your Book</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close js-exitAdd" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -123,30 +121,32 @@
 <template name = "booksLib">
 <div class="container darkmode">
   <div class="row">
+     {{>viewTemp}}
+    {{>editTemp}}
     {{#each allBooks}}
    
 <div class="col-md-4" id={{_id}}>
-            <div class="card mb-4 shadow-sm  ">
+            <div class="card mb-4 shadow-sm cardpage ">
               <img src= {{path}} alt="temp photo" class="brath">
               <div class="card-body">
                 <h5 class="card-text">{{bName}}</h5>
                 
                 <p class="card-text"> {{bAuth}}</p>
-                {{>viewTemp}}
-                {{>editTemp}}
+               
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary js-view ">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary js-edit">Edit</button>
                   </div>
-                  
-                  <i class="fa fa-thumbs-up goodcolor"></i>
-                  <i class="fa fa-thumbs-down bincolor"></i>
+                  <small class= "fa fa-eye text-muted">{{viewst}} views </small>
+                  <i class="fa fa-thumbs-up goodcolor js-upup">{{upvote}}</i>
+                  <i class="fa fa-thumbs-down bincolor js-downdown">{{downvote}}</i>
+                   <i class="fa fa-trash bincolor js-delete"></i>
                   
                 </div>
               </div>
             </div>
-          </div> <!-- /col -->
+          </div> 
     {{/each}}
   </div>  
   </div>     
@@ -160,7 +160,7 @@
           
           {{> booksLib}}
 
-        </div> <!-- /row for all cards -->
+        </div> 
       </div>
     </div>
 
@@ -168,10 +168,7 @@
 </template>
 
 <template name = "viewTemp">
-  <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewBook">
-  Launch demo modal
-</button> -->
+ 
 
 <!-- Modal -->
 <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -188,7 +185,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <i class="fa fa-trash bincolor js-delete"></i>
+       
       </div>
     </div>
   </div>
@@ -210,7 +207,7 @@
 <template name="editTemp">
     <!-- Modal -->
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editbookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -220,7 +217,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <img src="imgPlaceHolder.png" alt="" class="placeHolder">
+        
         <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text" >Title</span>
@@ -250,9 +247,10 @@
   <textarea class="form-control" aria-label="With textarea" id = "editdesc" ></textarea>
 </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer ">
         <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary js-editsave" >Save changes</button>
+        <button type="button" class="btn btn-primary js-editsave" data-dismiss="modal" >Save changes</button>
+        <input type="text" id = "editId">
       </div>
     </div>
   </div>
